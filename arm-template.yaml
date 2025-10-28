@@ -1,0 +1,26 @@
+properties:
+  configuration:  
+    secrets:
+    - name: acr-password
+      value: ${VAR_ACR_PASSWORD}
+    registries:
+    - server: oneillnborges.azurecr.io
+      username: ${VAR_ACR_USER}
+      passwordSecretRef: acr-password
+  template:
+    containers:
+    - name: awms-broker
+      image: docker.io/rabbitmq:3.12.6-management
+      resources:
+        cpu: 0.5
+        memory: 1Gi
+      env:
+      - name: "RABBITMQ_DEFAULT_USER"
+        value: "OB"
+      - name: "RABBITMQ_DEFAULT_PASS"
+        value: "OBawms2025_09-3"        
+    - name: awms-services
+      image: oneillnborges.azurecr.io/hello-world
+      resources:
+        cpu: 0.5
+        memory: 1Gi
