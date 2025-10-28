@@ -57,6 +57,6 @@ jobs:
                 --resource-group hello-world-$GITHUB_RUN_ID \
                 --environment hello-world-env-$GITHUB_RUN_ID \
                 --name hellow-world \
-                yaml "./arm-template.yaml"
+                --yaml "./arm-template.yaml"
                 
                 
