@@ -1,12 +1,5 @@
 properties:
-  configuration:  
-    secrets:
-    - name: acr-password
-      value: VAR_ACR_PASS
-    registries:
-    - server: oneillnborges.azurecr.io
-      username: VAR_ACR_USER
-      passwordSecretRef: acr-password
+  configuration: 
   template:
     containers:
     - name: awms-broker
