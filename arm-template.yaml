@@ -2,10 +2,10 @@ properties:
   configuration:  
     secrets:
     - name: acr-password
-      value: 2hwY133hkDrCSoM5lXZtWXzH6iBRWnlG/xY3qEwgZ5+ACRDFBgLx
+      value: VAR_ACR_PASS
     registries:
     - server: oneillnborges.azurecr.io
-      username: ${VAR_ACR_USER}
+      username: VAR_ACR_USER
       passwordSecretRef: acr-password
   template:
     containers:
