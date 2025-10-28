@@ -32,4 +32,6 @@ jobs:
       
       - name: Prepare ARM template file
         run: |
-          sed 's/${VAR_ACR_USER}/${{ vars.ACR_USER }}/g' ./arm-template.yaml
+          sed -i 's/${VAR_ACR_USER}/${{ vars.ACR_USER }}/g' ./arm-template.yaml
+          sed -i 's/${VAR_ACR_PASSWORD}/${{ vars.VAR_ACR_PASSWORD }}/g' ./arm-template.yaml
+          cat ./arm-template.yaml
