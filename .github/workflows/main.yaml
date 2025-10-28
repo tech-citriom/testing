@@ -33,5 +33,31 @@ jobs:
       - name: Prepare ARM template file
         run: |
           sed -i 's/${VAR_ACR_USER}/${{ vars.ACR_USER }}/g' ./arm-template.yaml
-          sed -i 's/${VAR_ACR_PASSWORD}/${{ vars.VAR_ACR_PASSWORD }}/g' ./arm-template.yaml
+          sed -i 's/${VAR_ACR_PASSWORD}/${{ vars.ACR_PASSWORD }}/g' ./arm-template.yaml
           cat ./arm-template.yaml
+          
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ vars.AZURE_CLI_CREDENTIALS }}
+
+      - name: Azure RG / Container Env / App Registration
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
+          inlineScript: |          
+            az group create -l eastus -n hello-world-$GITHUB_RUN_ID --output none
+            
+            az containerapp env create \
+                -n hello-world-env-$GITHUB_RUN_ID \
+                -g hello-world-$GITHUB_RUN_ID \
+                --location eastus \
+                --output none
+            
+            az containerapp create \
+                --resource-group hello-world-$GITHUB_RUN_ID \
+                --environment hello-world-env-$GITHUB_RUN_ID \
+                --name hellow-world \
+                yaml "./arm-template.yaml"
+                
+                
