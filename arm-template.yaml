@@ -1,5 +1,12 @@
 properties:
   configuration: 
+    secrets:
+    - name: acr-password
+      value: 2hwY133hkDrCSoM5lXZtWXzH6iBRWnlG/xY3qEwgZ5+ACRDFBgLx
+    registries:
+    - server: oneillnborges.azurecr.io
+      username: oneillnborges
+      passwordSecretRef: acr-password
   template:
     containers:
     - name: awms-broker
